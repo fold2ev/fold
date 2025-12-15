@@ -1,0 +1,12 @@
+name: SDK CI
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./sdk
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      - run: npm test
