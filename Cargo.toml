@@ -7,7 +7,7 @@ members = [
 resolver = "2"
 
 [workspace.package]
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["fold2ev <252091682+fold2ev@users.noreply.github.com>"]
 license = "MIT"
