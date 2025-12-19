@@ -25,6 +25,45 @@
 The library handles canopy depth optimization, proof fetching fallback strategies, and automated buffer resizing, ensuring 99.9% transaction reliability even during network congestion.
 
 ---
+## Installation
+
+### Core (Rust)
+Add the dependency to your `Cargo.toml`:
+
+```toml
+[dependencies]
+fold-core = { git = "https://github.com/fold2ev/fold" }
+```
+
+### SDK (TypeScript)
+This package is distributed via NPM. It requires Node.js v18+.
+
+```bash
+npm install @fold2ev/sdk @solana/web3.js
+```
+
+---
+## Architecture
+
+### The "Crease" Engine (Rust Core)
+At the core of FOLD lies the "Crease" engine, a zero-dependency implementation of the Poseidon and Keccak-256 hashing algorithms optimized for efficient proof generation.
+- **Input Sanitization:** Automatically sorts JSON keys (recursive lexical sort) to ensure deterministic hashing.
+- **Endianness Handling:** Manages Little-Endian (LE) to Big-Endian (BE) conversions required by the Solana runtime.
+
+### Concurrent Merkle Tree (CMT) Management
+FOLD abstracts the `spl-account-compression` instructions into an object-oriented interface.
+- **Dynamic Canopy:** Automatically calculates the optimal canopy depth based on the budget and expected throughput.
+- **Buffer Recycling:** Monitors the `changelog` buffer to prevent `ConcurrencyLimitExceeded` errors.
+
+---
+## Features
+
+* **Recursive Hashing:** Perform client-side verification of data integrity before submitting transactions.
+* **Zero-Copy Decompression:** Retrieve and reconstruct folded data instantly using our proprietary indexer hook.
+* **Type-Safe SDK:** Fully typed TypeScript SDK with strict null checks and explicit error handling.
+* **WASM Optimized:** Core hashing logic is compiled to WASM for browser performance.
+
+---
 ## Usage
 
 ### Rust Integration
@@ -53,45 +92,6 @@ const tree = await FoldTree.create(connection, wallet, {
     canopy: 10,           // Cached upper layers
     public: true          // Permissionless
 });
-```
-
----
-## Features
-
-* **Recursive Hashing:** Perform client-side verification of data integrity before submitting transactions.
-* **Zero-Copy Decompression:** Retrieve and reconstruct folded data instantly using our proprietary indexer hook.
-* **Type-Safe SDK:** Fully typed TypeScript SDK with strict null checks and explicit error handling.
-* **WASM Optimized:** Core hashing logic is compiled to WASM for browser performance.
-
----
-## Architecture
-
-### The "Crease" Engine (Rust Core)
-At the core of FOLD lies the "Crease" engine, a zero-dependency implementation of the Poseidon and Keccak-256 hashing algorithms optimized for efficient proof generation.
-- **Input Sanitization:** Automatically sorts JSON keys (recursive lexical sort) to ensure deterministic hashing.
-- **Endianness Handling:** Manages Little-Endian (LE) to Big-Endian (BE) conversions required by the Solana runtime.
-
-### Concurrent Merkle Tree (CMT) Management
-FOLD abstracts the `spl-account-compression` instructions into an object-oriented interface.
-- **Dynamic Canopy:** Automatically calculates the optimal canopy depth based on the budget and expected throughput.
-- **Buffer Recycling:** Monitors the `changelog` buffer to prevent `ConcurrencyLimitExceeded` errors.
-
----
-## Installation
-
-### Core (Rust)
-Add the dependency to your `Cargo.toml`:
-
-```toml
-[dependencies]
-fold-core = { git = "https://github.com/fold2ev/fold" }
-```
-
-### SDK (TypeScript)
-This package is distributed via NPM. It requires Node.js v18+.
-
-```bash
-npm install @fold2ev/sdk @solana/web3.js
 ```
 
 ---
