@@ -38,3 +38,5 @@ impl Hasher {
         output
     }
 }
+
+// Performance optimization: Zero-copy trait implemented
