@@ -101,3 +101,4 @@ const tree = await FoldTree.create(connection, wallet, {
 Copyright © 2026 FOLD Labs.
 Released under the **MIT License**.
 
+
