@@ -1,5 +1,6 @@
 use anchor_lang::prelude::*;
-declare_id!("Fold111111111111111111111111111111111111111");
+
+declare_id!("F1111111111111111111111111111111111111111");
 
 #[program]
 pub mod fold_program {
